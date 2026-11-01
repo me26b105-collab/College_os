@@ -99,6 +99,7 @@ class CommandPalette(QDialog):
             ("Jump to: Screen Time & Digital Wellbeing", 9, "💻"),
             ("Jump to: Notes & Knowledge Library", 10, "📝"),
             ("Jump to: Personal Projects & Kanban Board", 11, "🗂️"),
+            ("Jump to: Assessment & Grade Tracker", 12, "📈"),
         ]
 
         self.populate_items()

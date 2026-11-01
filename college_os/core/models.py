@@ -13,7 +13,7 @@ class Course(Base):
     name = Column(String, nullable=False)
     code = Column(String, nullable=False)
     color = Column(String, default="#FFFFFF")
-    credits = Column(Float, default=0.0)
+    credits = Column(Float, default=3.0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     tasks = relationship("Task", back_populates="course")
@@ -24,6 +24,7 @@ class Course(Base):
     study_sessions = relationship("StudySession", back_populates="course", cascade="all, delete-orphan")
     notes = relationship("Note", back_populates="course", cascade="all, delete-orphan")
     resources = relationship("Resource", back_populates="course", cascade="all, delete-orphan")
+    grade_items = relationship("GradeItem", back_populates="course", cascade="all, delete-orphan")
 
 class Task(Base):
     __tablename__ = "tasks"
@@ -147,8 +148,20 @@ class ProjectTask(Base):
     id = Column(String, primary_key=True, default=generate_uuid)
     project_id = Column(String, ForeignKey("projects.id"), nullable=False)
     title = Column(String, nullable=False)
-    status = Column(String, default="To Do") # Backlog, To Do, In Progress, Done
+    status = Column(String, default="To Do")
     priority = Column(String, default="Medium")
     due_date = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     project = relationship("Project", back_populates="tasks")
+
+class GradeItem(Base):
+    __tablename__ = "grade_items"
+    id = Column(String, primary_key=True, default=generate_uuid)
+    course_id = Column(String, ForeignKey("courses.id"), nullable=False)
+    title = Column(String, nullable=False)
+    category = Column(String, default="Assignment") # Exam, Assignment, Quiz, Project, Lab
+    weight_percent = Column(Float, default=10.0)
+    score_achieved = Column(Float, default=0.0)
+    max_score = Column(Float, default=100.0)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    course = relationship("Course", back_populates="grade_items")

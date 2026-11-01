@@ -22,6 +22,7 @@ from college_os.ui.scheduler_view import SchedulerView
 from college_os.ui.digital_wellbeing_view import DigitalWellbeingView
 from college_os.ui.notes_view import NotesView
 from college_os.ui.kanban_view import KanbanView
+from college_os.ui.analytics_view import AnalyticsView
 
 class Sidebar(QWidget):
     def __init__(self, nav_callback, parent=None):
@@ -60,7 +61,8 @@ class Sidebar(QWidget):
             ("Smart Scheduler", 8, "🤖"),
             ("Screen Time", 9, "💻"),
             ("Notes & Resources", 10, "📝"),
-            ("Projects & Kanban", 11, "🗂️")
+            ("Projects & Kanban", 11, "🗂️"),
+            ("Grade Tracker", 12, "📈")
         ]
         
         self.buttons = []
@@ -113,6 +115,7 @@ class MainWindow(QMainWindow):
         self.wellbeing_view = DigitalWellbeingView()
         self.notes_view = NotesView()
         self.kanban_view = KanbanView()
+        self.analytics_view = AnalyticsView()
         
         self.content_area.addWidget(self.dashboard_view)       
         self.content_area.addWidget(self.courses_view) 
@@ -126,6 +129,7 @@ class MainWindow(QMainWindow):
         self.content_area.addWidget(self.wellbeing_view)
         self.content_area.addWidget(self.notes_view)
         self.content_area.addWidget(self.kanban_view)
+        self.content_area.addWidget(self.analytics_view)
         
         content_container = QWidget()
         content_layout = QVBoxLayout(content_container)
@@ -179,6 +183,7 @@ class MainWindow(QMainWindow):
         if index == 9: self.wellbeing_view.refresh_dates()
         if index == 10: self.notes_view.refresh_courses()
         if index == 11: self.kanban_view.refresh_projects()
+        if index == 12: self.analytics_view.refresh_all()
 
 def main():
     init_db()
