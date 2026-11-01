@@ -100,6 +100,7 @@ class CommandPalette(QDialog):
             ("Jump to: Notes & Knowledge Library", 10, "📝"),
             ("Jump to: Personal Projects & Kanban Board", 11, "🗂️"),
             ("Jump to: Assessment & Grade Tracker", 12, "📈"),
+            ("Jump to: Settings & Data Management", 13, "⚙️"),
         ]
 
         self.populate_items()

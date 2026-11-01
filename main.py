@@ -23,6 +23,7 @@ from college_os.ui.digital_wellbeing_view import DigitalWellbeingView
 from college_os.ui.notes_view import NotesView
 from college_os.ui.kanban_view import KanbanView
 from college_os.ui.analytics_view import AnalyticsView
+from college_os.ui.settings_view import SettingsView
 
 class Sidebar(QWidget):
     def __init__(self, nav_callback, parent=None):
@@ -62,7 +63,8 @@ class Sidebar(QWidget):
             ("Screen Time", 9, "💻"),
             ("Notes & Resources", 10, "📝"),
             ("Projects & Kanban", 11, "🗂️"),
-            ("Grade Tracker", 12, "📈")
+            ("Grade Tracker", 12, "📈"),
+            ("Settings & Backup", 13, "⚙️")
         ]
         
         self.buttons = []
@@ -116,6 +118,7 @@ class MainWindow(QMainWindow):
         self.notes_view = NotesView()
         self.kanban_view = KanbanView()
         self.analytics_view = AnalyticsView()
+        self.settings_view = SettingsView()
         
         self.content_area.addWidget(self.dashboard_view)       
         self.content_area.addWidget(self.courses_view) 
@@ -130,6 +133,7 @@ class MainWindow(QMainWindow):
         self.content_area.addWidget(self.notes_view)
         self.content_area.addWidget(self.kanban_view)
         self.content_area.addWidget(self.analytics_view)
+        self.content_area.addWidget(self.settings_view)
         
         content_container = QWidget()
         content_layout = QVBoxLayout(content_container)
